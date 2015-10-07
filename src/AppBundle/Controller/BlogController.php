@@ -39,7 +39,7 @@ class BlogController extends Controller
      */
     public function indexAction($page)
     {
-        $query = $this->getDoctrine()->getRepository('AppBundle:Post')->queryLatest();
+        $query = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsByTitleLike('curabitur');
 
         $paginator = $this->get('knp_paginator');
         $posts = $paginator->paginate($query, $page, Post::NUM_ITEMS);

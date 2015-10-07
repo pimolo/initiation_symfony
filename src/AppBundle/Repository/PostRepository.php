@@ -41,4 +41,15 @@ class PostRepository extends EntityRepository
     {
         $this->queryLatest()->getResult();
     }
+
+    public function getPostsByTitleLike($chunk)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $query = $qb
+            ->where($qb->expr()->like("p.title", ':chunk'))
+            ->setParameter('chunk', '%' . $chunk . '%')
+            ->getQuery()
+        ;
+        return $query->getResult();
+    }
 }
